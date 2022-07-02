@@ -27,18 +27,25 @@ Base = declarative_base()
 #     person = relationship(Person)
 
 class User(Base):
-    __tablename__ 'Users'
-    id = Column(Integer, primary_key = True, unique_key = True)
+    __tablename__ ='Users'
+    id = Column(Integer, primary_key = True, unique = True)
     name = Column(String(256))
-    email = = Column(String(256))
+    email = Column(String(256))
     user_name = Column(String(256))
     password = Column(String(256))
-    favorites =
+
+class Favorites(Base):
+    __tablename__ = 'Favorites'
+    id = Column(Integer, primary_key = True, unique = True)
+    user_id = Column(Integer, ForeignKey('Users.id'))
+    fave_id = Column(Integer)
+    item_type = Column(String(256))
+    name = Column(String(256))
 
 
 class Character(Base):
     __tablename__ = 'Character'
-    id = Column(Integer, primary_key=True, unique_key = True)
+    id = Column(Integer, primary_key=True, unique = True)
     name = Column(String(256))
     birth_year = Column(String(256))
     eye_color = Column(String(256))
@@ -48,14 +55,13 @@ class Character(Base):
     mass = Column(String(256))
     skin_color = Column(String(256))
     homeworld = Column(String(256))
-    # films array
-    # species array 
-    # starships array 
-    # vehicles array 
+    
+    def to_dict(self):
+        return {}
 
 class Starships(Base):
     __tablename__ = 'Starships'
-    id = Column(Integer, primary_key=True, unique_key = True)
+    id = Column(Integer, primary_key=True, unique = True)
     name = Column(String(256))
     model = Column(String(256)) 
     starship_class = Column(String(256))
@@ -69,9 +75,12 @@ class Starships(Base):
     MGLT = Column(String(256))
     cargo_capacity = Column(String(256))
 
+    def to_dict(self):
+        return {}
+
 class Vehicles(Base):
     __tablename__ = "Vehicles"
-    id = Column(Integer, primary_key = True, unique_key = True)
+    id = Column(Integer, primary_key = True, unique = True)
     name = Column(String(256))
     model = Column(String(256))
     vehicle_class = Column(String(256))
@@ -83,9 +92,12 @@ class Vehicles(Base):
     max_atmosphering_speed = Column(String(256))
     cargo_capacity = Column(String(256))
 
+    def to_dict(self):
+        return {}
+
 class Planets(Base):
     __tablename__ = "Planets"
-    id = Column(Integer, primary_key = True, unique_key = True)
+    id = Column(Integer, primary_key = True, unique = True)
     name = Column(String(256))
     diameter = Column(Integer)
     rotation_period = Column(Integer)
